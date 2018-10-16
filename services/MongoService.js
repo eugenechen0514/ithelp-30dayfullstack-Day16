@@ -2,9 +2,11 @@ class MongoService {
     /**
      * 
      * @param {MongoClient} mongoClient
+     * @param {EchoDao} echoDao
      */
-    constructor({mongoClient}) {
+    constructor({ mongoClient, echoDao }) {
         this.mongoClient = mongoClient;
+        this.echoDao = echoDao;
     }
 
     /**
@@ -13,6 +15,15 @@ class MongoService {
      */
     isConnected() {
         return Promise.resolve(this.mongoClient.isConnected())
+    }
+
+    /**
+     * 
+     * @param {*} data 
+     * @return Promise
+     */
+    async insertEcho(data) {
+        return this.echoDao.insert(data);
     }
 }
 
