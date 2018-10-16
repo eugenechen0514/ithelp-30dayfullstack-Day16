@@ -2,9 +2,11 @@ class MongoService {
     /**
      * 
      * @param {MongoClient} mongoClient
+     * @param {EchoDao} echoDao
      */
-    constructor({ mongoClient }) {
+    constructor({ mongoClient, echoDao }) {
         this.mongoClient = mongoClient;
+        this.echoDao = echoDao;
     }
 
     /**
@@ -21,12 +23,7 @@ class MongoService {
      * @return Promise
      */
     async insertEcho(data) {
-        const dbName = 'myproject';
-        const db = this.mongoClient.db(dbName);
-        const collection = db.collection('echo');
-        const result = await collection.insertOne(data);
-        console.log(result);
-        return result;
+        return this.echoDao.insert(data);
     }
 }
 
