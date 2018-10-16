@@ -28,25 +28,17 @@ function createRouter(dependencies) {
   router.post('/api/echo', function (req, res, next) {
     const body = req.body;
 
-    // 寫入 MongoDb
-    const worker = (async function (data) {
-      const db = client.db(dbName);
-      const collection = db.collection('echo');
-      const result = await collection.insertOne(data);
-      console.log(result);
-    })(body);
-
-    // 回應
-    worker.then(() => {
-      res.json(body);
-    })
+    mongoService.insertEcho(body)
+      .then(() => {
+        res.json(body);
+      })
       .catch(next); // 發生 error 的話，next() 交給之後的 middleware 處理，express 有預設的處理方法
   });
 
   router.get('/api/mongo', function (req, res, next) {
     mongoService.isConnected()
       .then(isConnected => {
-        res.json({isConnected});
+        res.json({ isConnected });
       })
       .catch(next);
   });
