@@ -19,7 +19,8 @@ client.connect()
   });
 //////////　MongoDB 連線 (end)　/////////
 
-var indexRouter = require('./routes/index');
+const {createRouter: createRootRouter} = require('./routes/index');
+const indexRouter = createRootRouter({client});
 var usersRouter = require('./routes/users');
 
 var app = express();
