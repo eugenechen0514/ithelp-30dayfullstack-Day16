@@ -2,6 +2,7 @@
   "name": "hello-mongo",
   "version": "0.0.0",
   "private": true,
+  "main" : "./bin/www",
   "scripts": {
     "start": "PORT=3001 node ./bin/www"
   },
