@@ -1,19 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const MongoClient = require('mongodb').MongoClient;
-
-// index.js 執行就建立連線
-const url = 'mongodb://localhost:27017';
-const dbName = 'myproject';
-const client = new MongoClient(url, { useNewUrlParser: true });
-client.connect()
-  .then((connectedClient) => {
-    console.log('mongodb is connected');
-  })
-  .catch(error => {
-    console.error(error);
-  });
-
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

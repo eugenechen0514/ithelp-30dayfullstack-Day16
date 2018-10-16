@@ -5,6 +5,20 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
+//////////　MongoDB 連線 (start)　/////////
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+const dbName = 'myproject';
+const client = new MongoClient(url, { useNewUrlParser: true });
+client.connect()
+  .then((connectedClient) => {
+    console.log('mongodb is connected');
+  })
+  .catch(error => {
+    console.error(error);
+  });
+//////////　MongoDB 連線 (end)　/////////
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
