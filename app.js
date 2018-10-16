@@ -22,7 +22,7 @@ client.connect()
 
 const mongoService = new MongoService({mongoClient: client});
 const {createRouter: createRootRouter} = require('./routes/index');
-const indexRouter = createRootRouter({client, mongoService});
+const indexRouter = createRootRouter({mongoService});
 var usersRouter = require('./routes/users');
 
 var app = express();
