@@ -2,12 +2,14 @@ var express = require('express');
 
 /**
  * 
- * @param {MongoClient} client 
+ * @param {object} dependencies
+ * @param {MongoService} dependencies.mongoService 
+ * @param {MongoClient} dependencies.client 
  */
 function createRouter(dependencies) {
   // Get dependencies
-  const {client} = dependencies;
-  if(!client) {
+  const { client, mongoService } = dependencies;
+  if (!client) {
     throw new Error('client is empty');
   }
 
@@ -42,9 +44,11 @@ function createRouter(dependencies) {
   });
 
   router.get('/api/mongo', function (req, res, next) {
-    res.json({
-      isConnected: client.isConnected(),
-    });
+    mongoService.isConnected()
+      .then(isConnected => {
+        res.json({isConnected});
+      })
+      .catch(next);
   });
 
   const mongoose = require('mongoose');

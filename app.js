@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+const MongoService = require('./services/MongoService');
 
 //////////　MongoDB 連線 (start)　/////////
 const MongoClient = require('mongodb').MongoClient;
@@ -19,8 +20,9 @@ client.connect()
   });
 //////////　MongoDB 連線 (end)　/////////
 
+const mongoService = new MongoService({mongoClient: client});
 const {createRouter: createRootRouter} = require('./routes/index');
-const indexRouter = createRootRouter({client});
+const indexRouter = createRootRouter({client, mongoService});
 var usersRouter = require('./routes/users');
 
 var app = express();
