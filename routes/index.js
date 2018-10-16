@@ -4,14 +4,10 @@ var express = require('express');
  * 
  * @param {object} dependencies
  * @param {MongoService} dependencies.mongoService 
- * @param {MongoClient} dependencies.client 
  */
 function createRouter(dependencies) {
   // Get dependencies
-  const { client, mongoService } = dependencies;
-  if (!client) {
-    throw new Error('client is empty');
-  }
+  const { mongoService } = dependencies;
 
   // Create a router
   var router = express.Router();
