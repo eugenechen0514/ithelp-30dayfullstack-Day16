@@ -11,7 +11,7 @@ class MongoService {
 
     /**
      * 
-     * @return Promise<bool>
+     * @returns Promise<bool>
      */
     isConnected() {
         return Promise.resolve(this.mongoClient.isConnected())
@@ -20,7 +20,7 @@ class MongoService {
     /**
      * 
      * @param {*} data 
-     * @return Promise
+     * @returns Promise
      */
     async insertEcho(data) {
         return this.echoDao.insert(data);
